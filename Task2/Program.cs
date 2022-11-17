@@ -24,28 +24,28 @@ namespace Task2
 
             try /// проверяем на правильность ввденого формата
             {
-                familySorted.Read();
-
+                familySorted.Read(out int number);
+                Console.WriteLine();
+                if (number == 1)
+                {
+                    ListFirstName.Sort(); /// сортируем список
+                    foreach (string fName in ListFirstName)
+                    {
+                        Console.WriteLine(fName);
+                    }
+                }
+                else
+                {
+                    ListFirstName.Reverse(); /// Кусортируем список в обратном порядке
+                    foreach (string fName in ListFirstName)
+                    {
+                        Console.WriteLine(fName);
+                    }
+                }
             }
             catch (FormatException)
             {
                 Console.WriteLine("Введено не корректное значение");
-            }
-
-            Console.WriteLine();
-
-            ListFirstName.Sort(); /// сортируем список
-            foreach (string fName in ListFirstName)
-            {
-                Console.WriteLine(fName);
-            }
-
-            Console.WriteLine();
-
-            ListFirstName.Reverse(); /// сортируем список в обратном порядке
-            foreach (string fName in ListFirstName)
-            {
-                Console.WriteLine(fName);
             }
         }
     }
@@ -54,12 +54,12 @@ namespace Task2
     {
         public delegate void FamilySortedDelegate(int number); /// создаем делегат , на ввод принимает число
         public event FamilySortedDelegate FamilySortedEvent; /// реализовываем событие
-        public void Read() /// создаем метод, который читает введеное значение
+        public void Read(out int number) /// создаем метод, который читает введеное значение
         {
             Console.WriteLine();
             Console.WriteLine("Введете число 1 (сортировка А-Я), либо число 2 (сортировка Я-А): ");
 
-            int number = Convert.ToInt32(Console.ReadLine()); /// введеное значение от пользователя
+            number = Convert.ToInt32(Console.ReadLine()); /// введеное значение от пользователя
 
             if (number != 1 && number != 2) throw new FormatException(); /// правильно введены ли только числа 1 или 2
 
